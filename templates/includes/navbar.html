@@ -1,0 +1,106 @@
+{% load static %}
+
+<header class="site-header">
+
+<!-- Announcement bar -->
+<div class="announcement-bar">
+  Discounts for new customers until next week! <a href="{% url 'store' %}">Shop now</a>
+</div>
+
+<!-- Marquee strip -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>✦ Free Return</span>
+    <span>✦ Secure Checkout</span>
+    <span>✦ Worldwide Support</span>
+    <span>✦ Free Return</span>
+    <span>✦ Secure Checkout</span>
+    <span>✦ Worldwide Support</span>
+    <span>✦ Free Return</span>
+    <span>✦ Secure Checkout</span>
+    <span>✦ Worldwide Support</span>
+    <span>✦ Free Return</span>
+    <span>✦ Secure Checkout</span>
+    <span>✦ Worldwide Support</span>
+  </div>
+</div>
+
+<!-- Header top -->
+<div class="container">
+  <div class="header-top">
+    <div>
+      <a href="#">English</a>
+      <a href="#">INR</a>
+      <a href="#"><i class="fa fa-envelope"></i> Email</a>
+      <a href="#"><i class="fa fa-phone"></i> Call us</a>
+    </div>
+    <div>
+      <a href="{% url 'store' %}">Shop</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header main -->
+<div class="container">
+  <div class="header-main">
+
+    <button class="mobile-toggle" aria-label="Toggle menu">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <a href="{% url 'home' %}" class="brand-wrap">
+      <span class="brand-dark">Afzal</span>
+      <span class="brand-accent"> Shoes</span>
+    </a>
+
+    <div class="category-dropdown">
+      <button class="dropdown-toggle" type="button">
+        <i class="fa fa-bars"></i> All category
+      </button>
+      <div class="dropdown-menu">
+        <a href="{% url 'store' %}">All Products</a>
+        {% for category in links %}
+          <a href="{{ category.get_url }}">{{ category.category_name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <a href="{% url 'store' %}" class="store-link">Store</a>
+
+    <div class="search-wrap mobile-nav">
+      <form action="{% url 'search' %}" method="GET">
+        <input type="text" placeholder="Search" name="keyword">
+        <button type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="d-flex align-items-center">
+      {% if user.id is None %}
+      <div class="widget-header">
+        <small class="title">Welcome guest!</small>
+        <div>
+          <a href="{% url 'login' %}">Sign in</a> |
+          <a href="{% url 'register' %}">Register</a>
+        </div>
+      </div>
+      {% else %}
+      <div class="widget-header">
+        <small class="title">Welcome {{user.first_name}}!</small>
+        <div>
+          <a href="{% url 'dashboard' %}">Dashboard</a> |
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+      {% endif %}
+      <a href="{% url 'cart' %}" class="cart-widget">
+        <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+        <span class="badge">{{cart_count}}</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</header>
